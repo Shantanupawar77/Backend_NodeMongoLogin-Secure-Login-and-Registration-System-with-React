@@ -2,14 +2,14 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
+
 const app = express();
+require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-require('dotenv').config();
-const port=process.env.PORT|8080;
 
-mongoose.connect(process.env.MOGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log("Connection successfully established"))
     .catch((err) => console.error("Connection failed:", err));
 
@@ -76,9 +76,9 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.listen(port, () => {
-    console.log(`Backend server started at port ${port}`);
-});
 
+app.listen(process.env.PORT, () => {
+    console.log(`Backend server started at port ${process.env.PORT}`);
+});
 
 
